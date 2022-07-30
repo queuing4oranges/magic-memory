@@ -1,5 +1,5 @@
 import './App.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import SingleCard from './components/SingleCard';
 
 //making an array of cards (not needed in the components, so here)
@@ -16,6 +16,9 @@ const cardImages=[
 function App() {
   const [cards, setCards] = useState([]);
   const [turns, setTurns] = useState(0);
+  //storing the choice the user makes:, when user clicks, we'll update state of card
+  const [choiceOne, setChoiceOne] = useState(null)
+  const [choiceTwo, setChoiceTwo] = useState(null)
 
 
   const shuffleCards = () =>{
@@ -25,9 +28,38 @@ function App() {
                                                           //take properties (here just src) of the card and add random id number
     setCards(shuffledCards)
     setTurns(0)
+    }
+
+    //handle a choice
+    const handleChoice = (card) =>{
+      console.log(card)
+                                                          //if it has no value -> card1 if it already has a value -> card2
+      choiceOne ? setChoiceTwo(card) : setChoiceOne(card)  //if choiceOne is null - set choiceOne to be the card, otherwise, set choiceTwo
+                                                          //dont compare cards here -> state need to be finished updating first!
+    }
+
+    const resetTurn = () =>{
+      setChoiceOne(null)
+      setChoiceTwo(null)
+      setTurns(prevTurns => prevTurns+1)
 
     }
-    console.log(cards, turns)
+    //compare 2 selected cards
+    useEffect(() => {
+      if (choiceOne && choiceTwo){
+        if (choiceOne.src === choiceTwo.src){
+        console.log("cards match")
+        resetTurn();
+      }else{
+        console.log("cards do not match")
+        resetTurn();
+      }
+      }
+
+    }, [choiceOne, choiceTwo])
+    
+
+
   return (
     <div className="App">
       <h1>Magic Match</h1>
@@ -35,7 +67,11 @@ function App() {
 
         <div className="card-grid">
         {cards.map(card => (
-        <SingleCard key={card.id} card={card} />
+        <SingleCard 
+        key={card.id} 
+        card={card}
+        handleChoice={handleChoice}
+        />    //passing fct in as prop for SingleCard
         ))}
     </div>
     </div>
