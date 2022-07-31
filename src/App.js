@@ -4,12 +4,12 @@ import SingleCard from './components/SingleCard';
 
 //making an array of cards (not needed in the components, so here)
 const cardImages=[
-  {"src":"/img/helmet-1.png"},
-  {"src":"/img/potion-1.png"},
-  {"src":"/img/ring-1.png"},
-  {"src":"/img/scroll-1.png"},
-  {"src":"/img/shield-1.png"},
-  {"src":"/img/sword-1.png"}
+  {"src":"/img/helmet-1.png" , matched: false }, //add property, so to begin with none of the cards are matched
+  {"src":"/img/potion-1.png" , matched: false },
+  {"src":"/img/ring-1.png"   , matched: false },  
+  {"src":"/img/scroll-1.png" , matched: false },
+  {"src":"/img/shield-1.png" , matched: false },
+  {"src":"/img/sword-1.png"  , matched: false }  
 ]
 
 
@@ -48,17 +48,25 @@ function App() {
     useEffect(() => {
       if (choiceOne && choiceTwo){
         if (choiceOne.src === choiceTwo.src){
-        console.log("cards match")
+        setCards(prevCards => {       //matching the cards - set prevState to matched / true / false
+          return prevCards.map(card=>{
+            if (card.src === choiceOne.src){
+              return{...card, matched:true}
+            }else{
+              return card
+            }
+          })
+        })
         resetTurn();
       }else{
-        console.log("cards do not match")
+        
         resetTurn();
       }
       }
 
     }, [choiceOne, choiceTwo])
     
-
+    console.log(cards)
 
   return (
     <div className="App">
