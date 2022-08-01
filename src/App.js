@@ -19,6 +19,7 @@ function App() {
   //storing the choice the user makes:, when user clicks, we'll update state of card
   const [choiceOne, setChoiceOne] = useState(null)
   const [choiceTwo, setChoiceTwo] = useState(null)
+  const [disabled, setDisabled] = useState(false)
 
 
   const shuffleCards = () =>{
@@ -26,6 +27,9 @@ function App() {
     .sort(() => Math.random() -0.5)                       //num negative? -> items will stay the same; num positiv? -> order will be swapped => random order
     .map((card) => ({ ...card, id: Math.random() }))      //return random id for each item;
                                                           //take properties (here just src) of the card and add random id number
+
+    setChoiceOne(null)                                    //resetting the card choices - just in case
+    setChoiceTwo(null)
     setCards(shuffledCards)
     setTurns(0)
     }
@@ -41,11 +45,14 @@ function App() {
       setChoiceOne(null)
       setChoiceTwo(null)
       setTurns(prevTurns => prevTurns+1)
+      setDisabled(false)
 
     }
     //compare 2 selected cards
     useEffect(() => {
+                                      
       if (choiceOne && choiceTwo){
+        setDisabled(true)                                 //disables clicking other cards when two clicked but before being compared
         if (choiceOne.src === choiceTwo.src){
         setCards(prevCards => {                           //matching the cards - set prevState to matched / true / false
           return prevCards.map(card=>{                    //fire the following fct for each card
@@ -67,6 +74,11 @@ function App() {
     }, [choiceOne, choiceTwo])
     console.log(cards)
 
+    //start game automatically
+    useEffect(() =>{
+      shuffleCards()                            //shuffleCards is the fct that starts the game (cant use useEff as it would start a game after every choice)
+    }, [])
+
   return (
     <div className="App">
       <h1>Magic Match</h1>
@@ -79,9 +91,11 @@ function App() {
         card={card}
         handleChoice={handleChoice}
         flipped={card===choiceOne || card===choiceTwo || card.matched}
+        disabled={disabled}
         />    
         ))}
     </div>
+    <p>Turns: {turns}</p>
     </div>
   );
 }
@@ -90,3 +104,5 @@ export default App;
 
 //SingleCard handleChoice={handleChoice} -> passing fcts in as props
 //3 possible scearios for flipped props: if choiceOne is equal to the card we're just outputting -> flipped=true, same for choiceTwo OR has been previously matched, so must stay flipped
+//make 'disabled' prop so the rest of the cards isnt clickable - should be true or false
+//final touches: count turns, start game automatically

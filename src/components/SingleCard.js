@@ -1,12 +1,12 @@
 import './SingleCard.css'
 
-export default function SingleCard({ card, handleChoice, flipped }){
+export default function SingleCard({ card, handleChoice, flipped, disabled }){
 
 
   const handleClick = () => {
-    handleChoice(card)
-    console.log(card.src)
-    
+    if(!disabled){
+        handleChoice(card)                    /*only fire fct when card is not disabled*/
+    }
   }
                                              /* mapping through cards and outputting them in a grid */
     return ( 
