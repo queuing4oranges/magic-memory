@@ -4,7 +4,7 @@ import SingleCard from './components/SingleCard';
 
 //making an array of cards (not needed in the components, so here)
 const cardImages=[
-  {"src":"/img/helmet-1.png" , matched: false }, //add property, so to begin with none of the cards are matched
+  {"src":"/img/helmet-1.png" , matched: false }, //adding 'matched' property, so to begin with none of the cards are matched
   {"src":"/img/potion-1.png" , matched: false },
   {"src":"/img/ring-1.png"   , matched: false },  
   {"src":"/img/scroll-1.png" , matched: false },
@@ -32,11 +32,10 @@ function App() {
 
     //handle a choice
     const handleChoice = (card) =>{
-      console.log(card)
                                                           //if it has no value -> card1 if it already has a value -> card2
       choiceOne ? setChoiceTwo(card) : setChoiceOne(card)  //if choiceOne is null - set choiceOne to be the card, otherwise, set choiceTwo
-                                                          //dont compare cards here -> state need to be finished updating first!
-    }
+    }                                                     //dont compare cards here -> state need to be finished updating first!
+  
 
     const resetTurn = () =>{
       setChoiceOne(null)
@@ -48,24 +47,24 @@ function App() {
     useEffect(() => {
       if (choiceOne && choiceTwo){
         if (choiceOne.src === choiceTwo.src){
-        setCards(prevCards => {       //matching the cards - set prevState to matched / true / false
-          return prevCards.map(card=>{
+        setCards(prevCards => {                           //matching the cards - set prevState to matched / true / false
+          return prevCards.map(card=>{                    //fire the following fct for each card
             if (card.src === choiceOne.src){
-              return{...card, matched:true}
+              return{...card, matched:true}               //spread out the card properties and set matched to true
             }else{
               return card
             }
           })
-        })
+        }) 
         resetTurn();
       }else{
         
-        resetTurn();
+        setTimeout(() => resetTurn(), 
+        1000);                                    //resetting the turn: 2nd card flips over immediately after not being a match -> use a timer
       }
       }
 
     }, [choiceOne, choiceTwo])
-    
     console.log(cards)
 
   return (
@@ -79,7 +78,8 @@ function App() {
         key={card.id} 
         card={card}
         handleChoice={handleChoice}
-        />    //passing fct in as prop for SingleCard
+        flipped={card===choiceOne || card===choiceTwo || card.matched}
+        />    
         ))}
     </div>
     </div>
@@ -87,3 +87,6 @@ function App() {
 }
 
 export default App;
+
+//SingleCard handleChoice={handleChoice} -> passing fcts in as props
+//3 possible scearios for flipped props: if choiceOne is equal to the card we're just outputting -> flipped=true, same for choiceTwo OR has been previously matched, so must stay flipped

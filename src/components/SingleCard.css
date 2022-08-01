@@ -8,3 +8,13 @@
     border: 2px solid #fff;
     border-radius: 6px;
 }
+
+/*front of card - pic*/
+.card .front{                   /*original state without flipped class*/
+    transform: rotateY(90deg);  /*rotate by 90° around y axis*/
+    position: absolute;         /*so it's relative to the parent element*/
+}
+
+.flipped .front{
+    transform: rotateY(0deg);   /*hiding the cover underneath it*/
+}
