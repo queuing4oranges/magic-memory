@@ -31,3 +31,13 @@
     transform: rotateY(90deg);
     transition-delay: 0s;
 }
+
+@media(max-width:600px){
+    .card img{
+        width: 100%;
+    }
+
+    .card {
+        margin: 5px;
+    }
+}
