@@ -4,12 +4,15 @@ import SingleCard from './components/SingleCard';
 
 //making an array of cards (not needed in the components, so here)
 const cardImages=[
-  {"src":"/img/helmet-1.png" , matched: false }, //adding 'matched' property, so to begin with none of the cards are matched
-  {"src":"/img/potion-1.png" , matched: false },
-  {"src":"/img/ring-1.png"   , matched: false },  
-  {"src":"/img/scroll-1.png" , matched: false },
-  {"src":"/img/shield-1.png" , matched: false },
-  {"src":"/img/sword-1.png"  , matched: false }  
+  {"src":"/img/bag.jpg" , matched: false }, //adding 'matched' property, so to begin with none of the cards are matched
+  {"src":"/img/dino.jpg" , matched: false },
+  {"src":"/img/katja.jpg" , matched: false },
+  {"src":"/img/leaves.jpg" , matched: false },
+  {"src":"/img/lhota.jpg" , matched: false },  
+  {"src":"/img/miqi.jpg" , matched: false }, 
+  {"src":"/img/shoe.jpg" , matched: false },
+  {"src":"/img/stars.jpg" , matched: false },
+  {"src":"/img/tram.jpg" , matched: false }  
 ]
 
 
@@ -81,8 +84,13 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Magic Match</h1>
-      <button onClick={shuffleCards}>New Game</button>
+      <div className="intro">
+          <h1>Easy Memory</h1>
+          <p>Turns: {turns}</p>
+          <button onClick={shuffleCards}>New Game</button>
+      </div>
+      
+      
 
         <div className="card-grid">
         {cards.map(card => (
@@ -91,12 +99,10 @@ function App() {
         card={card}
         handleChoice={handleChoice}
         flipped={card===choiceOne || card===choiceTwo || card.matched}
-        disabled={disabled}
-        />    
-        ))}
-    </div>
-    <p>Turns: {turns}</p>
-    </div>
+        disabled={disabled}/>     
+        ))}</div>
+     </div>   
+
   );
 }
 
