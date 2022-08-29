@@ -85,7 +85,7 @@ function App() {
   return (
     <div className="App">
       <div className="intro">
-          <h1>Easy Memory</h1>
+          <h1>Memory</h1>
           <p>Turns: {turns}</p>
           <button onClick={shuffleCards}>New Game</button>
       </div>

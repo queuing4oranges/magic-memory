@@ -46,6 +46,7 @@ button:hover {
 
 }
 
+/* mobile phone */
 @media(max-width:600px) {
   .App {
     display: flex;
@@ -77,12 +78,39 @@ button:hover {
   .card-grid {
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
+}
 
+/* ipad landscape */
+@media only screen and (min-device-width : 768px) 
+  and (max-device-width : 1024px) 
+  and (-webkit-min-device-pixel-ratio: 1) {
+  .App {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+  }
 
+  .intro {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+  }
 
+  h1,
+  p, 
+  button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+}
 
+/* ipad */
+@media only screen and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (-webkit-min-device-pixel-ratio: 1) {
 
-
-
-
+  .card-grid {
+    grid-template-columns: 1fr 1fr 1fr 1fr ;
+  }
 }
