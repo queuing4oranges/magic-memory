@@ -13,6 +13,9 @@ yellow: #F0AA31
   flex-direction: row;
 }
 
+.intro {
+  padding-right: 40px;
+}
 h1, 
 p {
   color: #274C94;
@@ -51,7 +54,7 @@ button:hover {
   .App {
     display: flex;
     flex-direction: column;
-    margin: 10px auto;
+    margin: 10px;
   }
 
   button {
@@ -87,7 +90,7 @@ button:hover {
   .App {
     display: flex;
     flex-direction: column;
-    padding: 20px;
+  
   }
 
   .intro {
@@ -95,6 +98,7 @@ button:hover {
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
+
   }
 
   h1,
