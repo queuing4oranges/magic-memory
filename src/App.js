@@ -27,18 +27,17 @@ function App() {
 
   const shuffleCards = () =>{
     const shuffledCards = [...cardImages, ...cardImages]  //duplicating cards - .sort -> neg. or pos.?
-    .map((card) => ({ ...card, id: Math.random() }))      //return random id for each item;
+    .sort(() => Math.random() -0.5)
+    .map((card) => ({ ...card, id: Math.random() }))
+    console.log(cards)      //return random id for each item;
                                                           
-
     setChoiceOne(null)                                    //resetting the card choices
     setChoiceTwo(null)
     setCards(shuffledCards)
     setTurns(0)
     }
 
-
-    const handleChoice = (card) =>{
-                                                       
+    const handleChoice = (card) =>{                                                
       choiceOne ? setChoiceTwo(card) : setChoiceOne(card)  
     }                                                     //dont compare cards here -> state need to be finished updating first!
   

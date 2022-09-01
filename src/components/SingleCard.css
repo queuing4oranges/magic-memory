@@ -13,7 +13,7 @@
 .card .front{                   /*original state without flipped class*/
     transform: rotateY(90deg);  /*rotate by 90° around y axis*/
     transition: all ease-in 0.2s;
-    position: absolute;         /*so it's relative to the parent element*/
+    position: absolute;         /*relative to the parent element*/
 }
 
 .flipped .front{

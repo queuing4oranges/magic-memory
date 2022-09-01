@@ -7,7 +7,7 @@ yellow: #F0AA31
 
 /*App in App.js*/
 .App {
-  max-width: 1600px;
+  width: 1100px;
   margin: 40px auto;
   display: flex;
   flex-direction: row;
